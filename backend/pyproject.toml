@@ -1,0 +1,54 @@
+[project]
+name = "aps"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "pydantic",
+    "uvicorn",
+    "ortools",
+    "gurobipy",
+    "torch",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "F",      # pyflakes
+    "W",      # pycodestyle warnings
+    "I",      # isort
+    "N",      # pep8-naming
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "SIM",    # flake8-simplify
+    "TCH",    # flake8-type-checking
+    "RUF",    # ruff-specific
+]
+ignore = [
+    "D",      # docstrings — project-specific
+    "ANN",    # annotations — mypy handles this
+    "S",      # bandit — not needed for internal tool
+]
+
+[tool.ruff.lint.per-file-ignores]
+"aps/api.py" = ["E501", "N818", "B007", "UP035", "TC001", "TC003", "UP037", "RUF046"]
+"aps/unified/scenarios/*" = ["TC001", "E501"]
+"aps/unified/_solve.py" = ["TC003"]
+"aps/unified/solvers/*" = ["TC003", "TC001"]
+
+[tool.mypy]
+strict = true
+disallow_any_generics = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+module = ["aps.api"]
+ignore_errors = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

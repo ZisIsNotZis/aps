@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Node / Vite / Playwright
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+npm-debug.log*
+
+# Local tooling and OS files
+.DS_Store
+.vscode/settings.json
+.claude/scheduled_tasks.lock
+*.log
+*.local

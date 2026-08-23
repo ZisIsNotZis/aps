@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">APS logo</title>
+  <desc id="desc">A layered schedule grid with an upward planning arrow.</desc>
+  <defs>
+    <linearGradient id="g" x1="32" y1="224" x2="224" y2="32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c3aed"/><stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="#0f172a"/>
+  <path d="M52 72h152M52 116h152M52 160h152M52 204h152M52 52v160M96 52v160M140 52v160M184 52v160" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+  <path d="m48 184 47-44 38 24 75-78" fill="none" stroke="url(#g)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m178 86 30 0-2 30" fill="none" stroke="#22d3ee" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
