@@ -19,4 +19,6 @@ npm-debug.log*
 .vscode/settings.json
 .claude/scheduled_tasks.lock
 *.log
+target/
+*.class
 *.local

@@ -114,6 +114,15 @@ Ultimately, APS could become a transparent planning laboratory or an embeddable 
 
 Issues and focused pull requests are welcome. Please include a small reproducible model for solver changes, update tests when behavior changes, and report objective/makespan/block-count effects. See [`CONTRIBUTING.md`](CONTRIBUTING.md), [`SECURITY.md`](SECURITY.md), and [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
 
+Agents can help triage issues, investigate failures, add tests, update docs, and
+implement accepted changes; maintainers review and merge contributions.
+
+## Versioning
+
+The backend package is currently `0.1.0`. Release notes live in Git history;
+tag public releases from a reviewed commit after tests and documentation agree.
+See [`docs/project-status.md`](docs/project-status.md) for scope and evidence.
+
 ## License
 
 APS is available under the [GNU Affero General Public License v3.0-only](LICENSE).

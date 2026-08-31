@@ -102,6 +102,12 @@ uv run ruff check .
 
 欢迎提交 issue 和聚焦的 Pull Request。修改求解器时请附带可复现的小模型；行为变化请更新测试，并说明目标值、总工期和计划块数量的影响。详见 [`CONTRIBUTING.md`](CONTRIBUTING.md)、[`SECURITY.md`](SECURITY.md) 和 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)。
 
+Agent 可以协助分类 issue、调查故障、添加测试、更新文档和实现已接受的变更；维护者负责审查并合并贡献。
+
+## 版本管理
+
+后端包当前为 `0.1.0`，前端应用为内部 `0.0.0`。公开发布应从测试和文档一致的审查提交创建标签；范围与证据见 [`docs/project-status.md`](docs/project-status.md)。
+
 ## 许可证
 
 APS 使用 [GNU Affero General Public License v3.0-only](LICENSE) 授权。
