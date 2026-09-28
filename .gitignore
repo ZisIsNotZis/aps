@@ -22,3 +22,16 @@ npm-debug.log*
 target/
 *.class
 *.local
+
+# Common local caches and temporary workspaces
+node_modules/
+.pi/
+.tmp/
+worktrees/
+.worktrees/
+
+# Local secrets, test caches, and generated logs
+.cache/
+.env
+.env.*
+!.env.example
