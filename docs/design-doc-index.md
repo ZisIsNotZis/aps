@@ -3,9 +3,7 @@
 ## Canonical doc (single source of truth)
 
 1. `docs/unified-aps-model.md`
-   **Single source of truth** for kernel semantics: unified entity model, rule shape,
-   QBE matching, $ expressions, auto-preconditions, orders, money-based objective,
-   holding rules, and replanning semantics. Supersedes all previous docs.
+   **Single source of truth** for kernel semantics: unified entity model, rule shape, QBE matching, $ expressions, auto-preconditions, orders, money-based objective, holding rules, and replanning semantics. Supersedes all previous docs.
 
 ## Reference-only docs (kept for context)
 
@@ -28,16 +26,12 @@ These documents reflect earlier phases and intermediate directions. They are ret
 ## Solver research
 
 2. `docs/numerical-optimization-planner-sota.md`
-   **SOTA research** for differentiable numerical optimization with gradual
-   constraint hardening. Covers Gumbel-Softmax, penalty methods, augmented
-   Lagrangian, diffusion models, and differentiable sorting for scheduling.
+   **SOTA research** for differentiable numerical optimization with gradual constraint hardening. Covers Gumbel-Softmax, penalty methods, augmented Lagrangian, diffusion models, and differentiable sorting for scheduling.
 
 ## Benchmark results
 
 3. `docs/benchmark-results.md`
-   **Solver benchmark** comparing greedy, CP-SAT, PyTorch, and fluid solvers
-   across all 9 scenarios. Covers correctness, money, blocks, makespan, and
-   solve time. Updated July 2026.
+   **Solver benchmark** comparing greedy, CP-SAT, PyTorch, and fluid solvers across all 9 scenarios. Covers correctness, money, blocks, makespan, and solve time. Updated July 2026.
 
 ## Current scope
 

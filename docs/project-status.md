@@ -2,9 +2,7 @@
 
 ## Classification
 
-**Useful, experimental software.** APS is runnable, inspectable planning
-software with a browser workbench, backend API, typed model, and solver suite.
-It is not a validated production MES/ERP replacement.
+**Useful, experimental software.** APS is runnable, inspectable planning software with a browser workbench, backend API, typed model, and solver suite. It is not a validated production MES/ERP replacement.
 
 ## Evidence
 
@@ -15,12 +13,8 @@ It is not a validated production MES/ERP replacement.
 
 ## Current version and limits
 
-The Python package is version `0.1.0`; the frontend is an internal `0.0.0`
-application. There is no public release artifact yet. Solver results are
-experiment-specific and must be checked against real manufacturing constraints.
+The Python package is version `0.1.0`; the frontend is an internal `0.0.0` application. There is no public release artifact yet. Solver results are experiment-specific and must be checked against real manufacturing constraints.
 
 ## Media and research
 
-No reviewed screenshot, recording, introduction-video package, or formal paper
-is present in this checkout. Prepare those manually after the UI and benchmark
-claims stabilize; do not infer production evidence from archived design notes.
+No reviewed screenshot, recording, introduction-video package, or formal paper is present in this checkout. Prepare those manually after the UI and benchmark claims stabilize; do not infer production evidence from archived design notes.
