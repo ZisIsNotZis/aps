@@ -16,7 +16,10 @@ APS is an experimental, local-first planning workbench: model a manufacturing sy
   <a href="backend/tests"><img src="https://img.shields.io/badge/tests-Pytest%20%2B%20Playwright-45ba63" alt="Pytest and Playwright"></a>
 </p>
 
-> 🚧 **Status: active experiment.** APS is a research/product prototype, not a validated MES/ERP replacement. APIs and solver behavior may change.
+> ✅ **Status: closed (milestone, 2026-09-29).** The experimental planning
+> workbench reached its goal: a runnable, inspectable prototype with a unified
+> model, multiple solvers, nine scenarios, and a browser UI. No further
+> development is planned unless the project's inputs or goals change.
 
 ## Why APS?
 

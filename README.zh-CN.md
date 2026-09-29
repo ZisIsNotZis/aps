@@ -16,7 +16,7 @@ APS 是一个实验性的本地优先计划工作台：用类型化 JSON/Pydanti
   <a href="backend/tests"><img src="https://img.shields.io/badge/tests-Pytest%20%2B%20Playwright-45ba63" alt="Pytest 与 Playwright"></a>
 </p>
 
-> 🚧 **状态：持续实验中。** APS 是研究/产品原型，不是经过验证的 MES/ERP 替代品；API 和求解器行为可能变化。
+> ✅ **状态：已收口（里程碑，2026-09-29）。** 实验性计划工作台已达成目标：一个可运行、可检查的原型，包含统一模型、多种求解器、九个场景和浏览器界面。除非项目输入或目标变化，否则不再继续开发。
 
 ## 为什么是 APS？
 
