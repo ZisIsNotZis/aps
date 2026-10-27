@@ -8,6 +8,7 @@ APS supports multiple solver backends via a plugin architecture. All solvers imp
 |--------|------|--------|---------|
 | `greedy` | Heuristic list scheduling | Production | No |
 | `cp_sat` | OR-Tools CP-SAT | Production | **Yes** |
+| `fluid` | Proportional-fairness simulation (PyTorch) | Available | No |
 | `gurobi` | Gurobi MIP | Available | No |
 | `timefold` | Timefold (Java sidecar) | Experimental | No |
 
@@ -52,7 +53,7 @@ Each solver was given 300s per scenario. Intermediate solution quality was recor
 
 ### Decay Curve Data
 
-The benchmark results (including full decay curves) are saved at `docs/solver_benchmark_5min.json`. Each solver entry includes:
+The benchmark results (including full decay curves) are saved at `backend/docs/solver_benchmark_5min.json`. Each solver entry includes:
 
 - `metrics`: Final schedule quality (blocks, makespan, fulfilled orders)
 - `solution_curve`: Array of `{time_s, objective_value, best_bound}` (CP-SAT/Gurobi) or `{timeS, score}` (Timefold) for each intermediate solution found
@@ -61,7 +62,7 @@ To visualize the decay curves:
 
 ```python
 import json
-with open("docs/solver_benchmark_5min.json") as f:
+with open("backend/docs/solver_benchmark_5min.json") as f:
     data = json.load(f)
 curve = data["results"]["electronics_smt"]["cp_sat"]["solution_curve"]
 times = [p["time_s"] for p in curve]
@@ -114,7 +115,7 @@ LocalSolver is a commercial-only product not available on PyPI. Not integrated.
 ## Adding a New Solver
 
 1. Create `solvers/my_solver.py`
-2. Register: `_SOLVERS["my_solver"] = solve_fn`
+2. Decorate the entry point with `@register_solver("my_solver")` (preferred; assigning `_SOLVERS["my_solver"] = solve_fn` works too)
 3. Follow the signature: `solve_fn(plan: CompiledPlan, config: SolverConfig) -> SolverResult`
 4. Import in `_solve.py` to trigger registration
 5. Use: `SolverConfig(solver="my_solver")`

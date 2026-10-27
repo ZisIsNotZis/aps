@@ -1,5 +1,7 @@
 # APS Solver Benchmark Results
 
+> **Historical record.** This report was produced with a `pytorch` (Gumbel-Softmax) solver that is **not in the current tree**; the shipped plugins are `greedy`, `cp_sat`, `fluid`, plus optional `gurobi` and `timefold`. The numbers below are kept as recorded, not re-run.
+
 **Date**: 2026-07-30
 **Solvers**: greedy, cp_sat (OR-Tools), pytorch (Gumbel-Softmax), fluid (proportional fairness)
 **Scenarios**: 9 manufacturing scenarios
