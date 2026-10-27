@@ -1,3 +1,5 @@
+**English** | [简体中文](README.zh-CN.md)
+
 <p align="center">
   <img src="aps-logo.svg" width="112" alt="APS logo">
 </p>
@@ -6,8 +8,6 @@
 
 <p align="center"><strong>Turn item flows, resources, rules, and orders into an executable production plan.</strong><br>
 Model a factory in a typed JSON schema, compile it to constraints, solve it with interchangeable algorithms, and inspect the result on a Gantt chart — locally, in one workbench.</p>
-
-<p align="center"><a href="README.zh-CN.md">简体中文</a> · English</p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0--only-blue.svg" alt="AGPL-3.0-only"></a>
@@ -69,6 +69,26 @@ On the project's recorded scenario suite, `greedy`, `cp_sat`, and `fluid` each f
 
 ## Architecture
 
+The workbench is two processes: a Vue 3 SPA that owns modelling and visualisation, and a FastAPI backend that owns the model contract, the compiler, the solver plugins, and the evaluator. They talk over a small JSON API — the UI never imports planning logic, so a solver can be swapped or benchmarked headlessly from Python.
+
+```text
+aps/
+├── backend/
+│   ├── main.py                  # uvicorn entry point (exports aps.api:app)
+│   ├── aps/unified/             # _schema · _compile · _expr · _evaluate · _solve
+│   │   ├── solvers/             # greedy · cp_sat · fluid · gurobi · timefold
+│   │   └── scenarios/           # nine scenario generators + registry
+│   ├── tests/                   # pytest suite (model, compile, solve, API)
+│   └── benchmark_*.py           # solver benchmark drivers and recorded JSON
+├── frontend/
+│   ├── src/components/UnifiedPlanner.vue   # scenario picker, model editor, results, Gantt
+│   ├── src/App.vue
+│   └── tests/                   # Playwright specs
+├── docs/                        # model spec, design index, benchmark records, archive
+├── run.sh                       # starts both dev servers
+└── aps-logo.svg
+```
+
 ```mermaid
 flowchart LR
   UI["Vue 3 + Vite<br/>Unified Planner + Gantt"] -->|"REST / JSON"| API["FastAPI<br/>health · scenarios · plan · validate"]
@@ -84,7 +104,7 @@ flowchart LR
 - `backend/aps/unified/_schema.py` — the `PlanningModel` contract; `_compile.py` turns it into a timed plan, `_expr.py` implements the restricted expression DSL, and `_evaluate.py` scores schedules.
 - `backend/aps/unified/_solve.py` + `solvers/` — solver registration and dispatch; every plugin implements `solve(CompiledPlan, SolverConfig) -> SolverResult`.
 - `backend/aps/unified/scenarios/` — one generator per scenario plus the registry that lists them.
-- `docs/` — canonical model spec, design-doc index, benchmark records, and archived notes.
+- `docs/` — canonical model spec ([`unified-aps-model.md`](docs/unified-aps-model.md)), [design-doc index](docs/design-doc-index.md), benchmark records, and archived notes.
 - `run.sh` — starts the backend (uvicorn, hot reload) and frontend (Vite, HMR) together.
 
 ## How to develop
@@ -94,8 +114,8 @@ Backend checks:
 ```bash
 cd backend
 uv sync
-uv run pytest
-uv run ruff check .
+uv run --with pytest --with httpx pytest   # pytest/httpx are test-only, not project deps
+uv run --with ruff ruff check .             # lint config lives in pyproject.toml
 ```
 
 Frontend build and tests:
@@ -104,7 +124,9 @@ Frontend build and tests:
 cd frontend
 npm ci
 npm run build
-npx playwright test   # specs live in frontend/tests; see playwright.config.js for the expected base URL
+npx playwright install                      # first run only: fetch browser binaries
+npm run dev -- --port 5174 &                # Playwright expects http://127.0.0.1:5174
+npx playwright test                         # specs live in frontend/tests
 ```
 
 To extend the project:

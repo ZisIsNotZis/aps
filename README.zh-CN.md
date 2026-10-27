@@ -1,3 +1,5 @@
+[English](README.md) | **简体中文**
+
 <p align="center">
   <img src="aps-logo.svg" width="112" alt="APS 标志">
 </p>
@@ -6,8 +8,6 @@
 
 <p align="center"><strong>把物料流、资源、规则与订单，变成可执行的生产计划。</strong><br>
 用类型化 JSON 模型描述工厂，编译成约束，换用不同算法求解，再在甘特图上检查结果——全部在本地一个工作台里完成。</p>
-
-<p align="center"><a href="README.md">English</a> · 简体中文</p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0--only-blue.svg" alt="AGPL-3.0-only"></a>
@@ -66,6 +66,26 @@ cd backend && uv sync && cd ..
 
 ## 架构
 
+工作台分成两个进程：Vue 3 单页应用负责建模与可视化，FastAPI 后端负责模型契约、编译器、求解器插件和评估器。两者通过一套精简的 JSON API 通信——前端不导入任何排程逻辑，因此求解器可以单独替换，也可以直接在 Python 里无界面地跑基准。
+
+```text
+aps/
+├── backend/
+│   ├── main.py                  # uvicorn 入口（导出 aps.api:app）
+│   ├── aps/unified/             # _schema · _compile · _expr · _evaluate · _solve
+│   │   ├── solvers/             # greedy · cp_sat · fluid · gurobi · timefold
+│   │   └── scenarios/           # 九个场景生成器 + 注册表
+│   ├── tests/                   # pytest 用例（模型、编译、求解、API）
+│   └── benchmark_*.py           # 求解器基准驱动与导出的 JSON
+├── frontend/
+│   ├── src/components/UnifiedPlanner.vue   # 场景选择、模型编辑、结果与甘特图
+│   ├── src/App.vue
+│   └── tests/                   # Playwright 用例
+├── docs/                        # 模型说明、设计索引、基准记录和归档
+├── run.sh                       # 同时启动前后端开发服务器
+└── aps-logo.svg
+```
+
 ```mermaid
 flowchart LR
   UI["Vue 3 + Vite<br/>Unified Planner + 甘特图"] -->|"REST / JSON"| API["FastAPI<br/>health · scenarios · plan · validate"]
@@ -81,7 +101,7 @@ flowchart LR
 - `backend/aps/unified/_schema.py`——`PlanningModel` 契约；`_compile.py` 把它编译成带时间的计划，`_expr.py` 实现受限表达式 DSL，`_evaluate.py` 为排程打分。
 - `backend/aps/unified/_solve.py` + `solvers/`——求解器注册与分发；每个插件都实现 `solve(CompiledPlan, SolverConfig) -> SolverResult`。
 - `backend/aps/unified/scenarios/`——每个场景一个生成器，另有负责列出场景的注册表。
-- `docs/`——权威模型说明、设计文档索引、基准记录和归档笔记。
+- `docs/`——权威模型说明（[`unified-aps-model.md`](docs/unified-aps-model.md)）、[设计文档索引](docs/design-doc-index.md)、基准记录和归档笔记。
 - `run.sh`——同时启动后端（uvicorn，热重载）和前端（Vite，HMR）。
 
 ## 如何开发
@@ -91,8 +111,8 @@ flowchart LR
 ```bash
 cd backend
 uv sync
-uv run pytest
-uv run ruff check .
+uv run --with pytest --with httpx pytest   # pytest/httpx 仅测试用，不在项目依赖里
+uv run --with ruff ruff check .             # lint 配置在 pyproject.toml
 ```
 
 前端构建与测试：
@@ -101,7 +121,9 @@ uv run ruff check .
 cd frontend
 npm ci
 npm run build
-npx playwright test   # 用例位于 frontend/tests；预期的访问地址见 playwright.config.js
+npx playwright install                      # 仅首次：下载浏览器二进制
+npm run dev -- --port 5174 &                # Playwright 预期访问 http://127.0.0.1:5174
+npx playwright test                         # 用例位于 frontend/tests
 ```
 
 要扩展项目：

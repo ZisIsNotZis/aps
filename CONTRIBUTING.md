@@ -11,8 +11,9 @@ Thanks for helping make APS better. This is an experimental planning system, so 
 
 ```bash
 cd backend
-uv run pytest
-uv run ruff check .
+uv sync
+uv run --with pytest --with httpx pytest
+uv run --with ruff ruff check .
 
 cd ../frontend
 npm ci
