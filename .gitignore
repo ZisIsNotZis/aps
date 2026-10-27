@@ -16,12 +16,16 @@ npm-debug.log*
 
 # Local tooling and OS files
 .DS_Store
+.idea/
 .vscode/settings.json
 .claude/scheduled_tasks.lock
 *.log
 target/
 *.class
 *.local
+
+# Generated build files
+backend/aps/unified/solvers/timefold/dependency-reduced-pom.xml
 
 # Common local caches and temporary workspaces
 node_modules/
